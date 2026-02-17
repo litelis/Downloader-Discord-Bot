@@ -194,4 +194,8 @@ SERVE_PORT=auto  # o número específico (8000-8999)
 
 ## 📜 Licencia
 
-Proyecto de código abierto. Uso libre.
+Este proyecto está licenciado bajo la [Licencia MIT](LICENSE).
+
+Copyright (c) 2025 litelis
+
+El software se proporciona "tal cual", sin garantía de ningún tipo. Consulta el archivo LICENSE para más detalles.

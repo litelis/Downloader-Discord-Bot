@@ -413,6 +413,9 @@ async def on_message(message):
     if message.author.bot:
         return
     
+    # Permitir mensajes de DM (canales privados) y canales de servidor
+    # No filtrar por tipo de canal - procesar todos los mensajes con enlaces
+    
     # Extraer URL del mensaje
     url = extract_url(message.content)
     if not url:
@@ -420,14 +423,16 @@ async def on_message(message):
     
     # Verificar si el bot está ocupado
     if download_lock.locked():
-        # Opcionalmente notificar que está ocupado
-        # await message.channel.send("🔒 ERROR 100: Bot ocupado, intenta más tarde.")
+        # Notificar en DM que está ocupado
+        if isinstance(message.channel, discord.DMChannel):
+            await message.channel.send("🔒 ERROR 100: Bot ocupado, intenta más tarde.")
         log("busy", None)
         return
     
     # Procesar descarga con lock
     async with download_lock:
         await process_download(message, url)
+
 
 # ==================== INICIO ====================
 def main():
